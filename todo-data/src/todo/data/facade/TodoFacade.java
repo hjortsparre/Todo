@@ -7,10 +7,11 @@ import javax.persistence.Query;
 
 import todo.data.entity.Todo;
 import todo.data.util.EMF;
+import todo.data.util.TodoDataException;
 
 public class TodoFacade {
 
-	public long create(String name) {
+	public long create(String name) throws TodoDataException {
 
 		EntityManager entityManager = EMF.createEntityManager();
 
@@ -29,7 +30,8 @@ public class TodoFacade {
 
 		} catch (Exception e) {
 
-			return 0;
+			throw new TodoDataException(TodoDataException.Type.DATABASE_ERROR,
+					e);
 
 		} finally {
 
@@ -43,16 +45,28 @@ public class TodoFacade {
 
 	}
 
-	public Todo find(long id) {
+	public Todo find(long id) throws TodoDataException {
 
 		EntityManager entityManager = EMF.createEntityManager();
 
 		try {
 
-			return entityManager.find(Todo.class, id);
+			Todo todo = entityManager.find(Todo.class, id);
+			if (todo == null) {
+				throw new TodoDataException(TodoDataException.Type.INCORRECT_PK);
+			}
+
+			return todo;
+
+		} catch (TodoDataException e) {
+
+			throw e;
 
 		} catch (Exception e) {
-			return null;
+
+			throw new TodoDataException(TodoDataException.Type.DATABASE_ERROR,
+					e);
+
 		} finally {
 
 			entityManager.close();
@@ -61,7 +75,7 @@ public class TodoFacade {
 
 	}
 
-	public List<Todo> findAll() {
+	public List<Todo> findAll() throws TodoDataException {
 
 		EntityManager entityManager = EMF.createEntityManager();
 
@@ -72,7 +86,10 @@ public class TodoFacade {
 			return query.getResultList();
 
 		} catch (Exception e) {
-			return null;
+
+			throw new TodoDataException(TodoDataException.Type.DATABASE_ERROR,
+					e);
+
 		} finally {
 
 			entityManager.close();
@@ -80,7 +97,7 @@ public class TodoFacade {
 		}
 	}
 
-	public List<Todo> findByName(String name) {
+	public List<Todo> findByName(String name) throws TodoDataException {
 
 		EntityManager entityManager = EMF.createEntityManager();
 
@@ -93,7 +110,10 @@ public class TodoFacade {
 			return query.getResultList();
 
 		} catch (Exception e) {
-			return null;
+
+			throw new TodoDataException(TodoDataException.Type.DATABASE_ERROR,
+					e);
+
 		} finally {
 
 			entityManager.close();

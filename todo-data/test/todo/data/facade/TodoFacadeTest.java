@@ -25,13 +25,13 @@ public class TodoFacadeTest {
 	}
 
 	@Test
-	public void testCreate() {
+	public void testCreate() throws Exception {
 		long id = todoFacade.create("Todo Item");
 		Assert.assertTrue(id != 0);
 	}
 
 	@Test
-	public void testFind() {
+	public void testFind() throws Exception {
 		long id = todoFacade.create("Todo Item");
 
 		Todo todo = todoFacade.find(id);
@@ -41,7 +41,7 @@ public class TodoFacadeTest {
 	}
 
 	@Test
-	public void testFindAll() {
+	public void testFindAll() throws Exception {
 		long id = todoFacade.create("Todo Item");
 
 		List<Todo> todos = todoFacade.findAll();
@@ -50,13 +50,20 @@ public class TodoFacadeTest {
 	}
 
 	@Test
-	public void testFindByName() {
+	public void testFindByName() throws Exception {
 		long id = todoFacade.create("Todo Item");
 
 		Todo todo = todoFacade.findByName("Todo Item").get(0);
 
 		Assert.assertEquals(id, todo.getId());
 		Assert.assertEquals("Todo Item", todo.getName());
+	}
+
+	@Test
+	public void testFindByNameNonExisting() throws Exception {
+		List<Todo> todos = todoFacade.findByName("Todo Item");
+		Assert.assertNotNull(todos);
+		Assert.assertEquals(0, todos.size());
 	}
 
 }
