@@ -3,9 +3,9 @@ package todo.logic.util;
 public class TodoLogicException extends Exception {
 
 	public enum Type {
-		
-		AUTHENTICATION_FAILED(501, "The authentication could not be completed"), 
-		TODO_NOT_CHECKED_OUT_BY_THIS_ACCOUNT(502, "This account isn't the current holder of this todo");
+
+		AUTHENTICATION_FAILED(501, "The authentication could not be completed"), TODO_NOT_CHECKED_OUT_BY_THIS_ACCOUNT(
+				502, "This account isn't the current holder of this todo");
 
 		private String message;
 		private int code;
@@ -17,6 +17,10 @@ public class TodoLogicException extends Exception {
 
 		public String getMessage() {
 			return message;
+		}
+
+		public int getCode() {
+			return this.code;
 		}
 	}
 
