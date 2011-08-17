@@ -3,6 +3,7 @@ package todo.data.entity;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Todo {
@@ -12,6 +13,9 @@ public class Todo {
 	private long id;
 
 	private String name;
+
+	@ManyToOne
+	private Account checkedOutBy;
 
 	public long getId() {
 		return id;
@@ -29,6 +33,12 @@ public class Todo {
 		this.name = name;
 	}
 
-	
+	public Account getCheckedOutBy() {
+		return checkedOutBy;
+	}
+
+	public void setCheckedOutBy(Account checkedOutBy) {
+		this.checkedOutBy = checkedOutBy;
+	}
 
 }

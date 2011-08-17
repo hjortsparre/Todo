@@ -9,6 +9,7 @@
 		<shared-cache-mode>NONE</shared-cache-mode>
 		<validation-mode>CALLBACK</validation-mode>
 		<class>todo.data.entity.Todo</class>
+		<class>todo.data.entity.Account</class>
 		<properties>
 			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/todo" />
 			<property name="javax.persistence.jdbc.password" value="todopass" />
@@ -24,6 +25,7 @@
 		<shared-cache-mode>NONE</shared-cache-mode>
 		<validation-mode>CALLBACK</validation-mode>
 		<class>todo.data.entity.Todo</class>
+		<class>todo.data.entity.Account</class>
 		<properties>
 			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/todo_test" />
 			<property name="javax.persistence.jdbc.password" value="todopass" />
