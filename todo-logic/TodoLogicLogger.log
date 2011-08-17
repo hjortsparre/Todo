@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+<record>
+  <date>2011-08-17T07:59:16</date>
+  <millis>1313560756770</millis>
+  <sequence>5</sequence>
+  <logger>todo.logic.util.TodoLogicLogger</logger>
+  <level>SEVERE</level>
+  <class>todo.logic.util.TodoLogicLogger</class>
+  <method>severe</method>
+  <thread>10</thread>
+  <message>TwitterBean tweet(We have a new member! Welcome: marcus.bendtsen@liu.se) - Threw exception: IllegalStateException - With message: Authentication credentials are missing. See http://twitter4j.org/configuration.html for the detail.</message>
+</record>
+<record>
+  <date>2011-08-17T07:59:16</date>
+  <millis>1313560756773</millis>
+  <sequence>9</sequence>
+  <logger>todo.logic.util.TodoLogicLogger</logger>
+  <level>SEVERE</level>
+  <class>todo.logic.util.TodoLogicLogger</class>
+  <method>severe</method>
+  <thread>10</thread>
+  <message>TwitterBean tweet(We have a new member! Welcome: marbe@ida.liu.se) - Threw exception: IllegalStateException - With message: Authentication credentials are missing. See http://twitter4j.org/configuration.html for the detail.</message>
+</record>
+<record>
+  <date>2011-08-17T07:59:16</date>
+  <millis>1313560756774</millis>
+  <sequence>10</sequence>
+  <logger>todo.logic.util.TodoLogicLogger</logger>
+  <level>INFO</level>
+  <class>todo.logic.util.TodoLogicLogger</class>
+  <method>info</method>
+  <thread>10</thread>
+  <message>TodoBean create(marcus.bendtsen@liu.se, secret, New Todo)</message>
+</record>
+<record>
+  <date>2011-08-17T07:59:16</date>
+  <millis>1313560756774</millis>
+  <sequence>11</sequence>
+  <logger>todo.logic.util.TodoLogicLogger</logger>
+  <level>INFO</level>
+  <class>todo.logic.util.TodoLogicLogger</class>
+  <method>info</method>
+  <thread>10</thread>
+  <message>AccountBean login(marcus.bendtsen@liu.se, secret)</message>
+</record>
+<record>
+  <date>2011-08-17T07:59:16</date>
+  <millis>1313560756789</millis>
+  <sequence>15</sequence>
+  <logger>todo.logic.util.TodoLogicLogger</logger>
+  <level>SEVERE</level>
+  <class>todo.logic.util.TodoLogicLogger</class>
+  <method>severe</method>
+  <thread>10</thread>
+  <message>TwitterBean tweet(marcus.bendtsen@liu.se created a new Todo: New Todo) - Threw exception: IllegalStateException - With message: Authentication credentials are missing. See http://twitter4j.org/configuration.html for the detail.</message>
+</record>
+<record>
+  <date>2011-08-17T07:59:16</date>
+  <millis>1313560756790</millis>
+  <sequence>16</sequence>
+  <logger>todo.logic.util.TodoLogicLogger</logger>
+  <level>INFO</level>
+  <class>todo.logic.util.TodoLogicLogger</class>
+  <method>info</method>
+  <thread>10</thread>
+  <message>TodoBean checkOut(marcus.bendtsen@liu.se, secret, 3)</message>
+</record>
+<record>
+  <date>2011-08-17T07:59:16</date>
+  <millis>1313560756790</millis>
+  <sequence>17</sequence>
+  <logger>todo.logic.util.TodoLogicLogger</logger>
+  <level>INFO</level>
+  <class>todo.logic.util.TodoLogicLogger</class>
+  <method>info</method>
+  <thread>10</thread>
+  <message>AccountBean login(marcus.bendtsen@liu.se, secret)</message>
+</record>
+<record>
+  <date>2011-08-17T07:59:16</date>
+  <millis>1313560756806</millis>
+  <sequence>20</sequence>
+  <logger>todo.logic.util.TodoLogicLogger</logger>
+  <level>SEVERE</level>
+  <class>todo.logic.util.TodoLogicLogger</class>
+  <method>severe</method>
+  <thread>10</thread>
+  <message>TwitterBean tweet(marcus.bendtsen@liu.se checked out Todo with id: 3) - Threw exception: IllegalStateException - With message: Authentication credentials are missing. See http://twitter4j.org/configuration.html for the detail.</message>
+</record>
+<record>
+  <date>2011-08-17T07:59:16</date>
+  <millis>1313560756806</millis>
+  <sequence>21</sequence>
+  <logger>todo.logic.util.TodoLogicLogger</logger>
+  <level>INFO</level>
+  <class>todo.logic.util.TodoLogicLogger</class>
+  <method>info</method>
+  <thread>10</thread>
+  <message>TodoBean checkIn(marbe@ida.liu.se, secret)</message>
+</record>
+<record>
+  <date>2011-08-17T07:59:16</date>
+  <millis>1313560756807</millis>
+  <sequence>22</sequence>
+  <logger>todo.logic.util.TodoLogicLogger</logger>
+  <level>INFO</level>
+  <class>todo.logic.util.TodoLogicLogger</class>
+  <method>info</method>
+  <thread>10</thread>
+  <message>AccountBean login(marbe@ida.liu.se, secret)</message>
+</record>
+<record>
+  <date>2011-08-17T07:59:16</date>
+  <millis>1313560756810</millis>
+  <sequence>25</sequence>
+  <logger>todo.logic.util.TodoLogicLogger</logger>
+  <level>WARNING</level>
+  <class>todo.logic.util.TodoLogicLogger</class>
+  <method>warning</method>
+  <thread>10</thread>
+  <message>TodoBean checkIn(3) - Threw exception: TodoLogicException - With message: This account isn't the current holder of this todo</message>
+</record>
+<record>
+  <date>2011-08-17T07:59:17</date>
+  <millis>1313560757043</millis>
+  <sequence>30</sequence>
+  <logger>todo.logic.util.TodoLogicLogger</logger>
+  <level>SEVERE</level>
+  <class>todo.logic.util.TodoLogicLogger</class>
+  <method>severe</method>
+  <thread>10</thread>
+  <message>TwitterBean tweet(We have a new member! Welcome: marcus.bendtsen@gmail.com) - Threw exception: IllegalStateException - With message: Authentication credentials are missing. See http://twitter4j.org/configuration.html for the detail.</message>
+</record>
+<record>
+  <date>2011-08-17T07:59:17</date>
+  <millis>1313560757043</millis>
+  <sequence>31</sequence>
+  <logger>todo.logic.util.TodoLogicLogger</logger>
+  <level>INFO</level>
+  <class>todo.logic.util.TodoLogicLogger</class>
+  <method>info</method>
+  <thread>10</thread>
+  <message>AccountBean login(marcus.bendtsen@gmail.com, secret)</message>
+</record>
+<record>
+  <date>2011-08-17T07:59:17</date>
+  <millis>1313560757045</millis>
+  <sequence>33</sequence>
+  <logger>todo.logic.util.TodoLogicLogger</logger>
+  <level>INFO</level>
+  <class>todo.logic.util.TodoLogicLogger</class>
+  <method>info</method>
+  <thread>10</thread>
+  <message>AccountBean login(marcus.bendtsen@gmail.com, secret)</message>
+</record>
+<record>
+  <date>2011-08-17T07:59:17</date>
+  <millis>1313560757275</millis>
+  <sequence>37</sequence>
+  <logger>todo.logic.util.TodoLogicLogger</logger>
+  <level>WARNING</level>
+  <class>todo.logic.util.TodoLogicLogger</class>
+  <method>warning</method>
+  <thread>10</thread>
+  <message>AccountFacade login(marcus.bendtsen@gmail.com, secret) - Threw exception: TodoLogicException - With message: The authentication could not be completed</message>
+</record>
+</log>
