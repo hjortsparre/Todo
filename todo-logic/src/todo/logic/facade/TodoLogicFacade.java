@@ -64,7 +64,8 @@ public class TodoLogicFacade {
 
 		Todo todo = todoFacade.find(todoId);
 
-		if (todo != null && todo.getCheckedOutBy().getId() == account.getId()) {
+		if (todo != null && todo.getCheckedOutBy() != null
+				&& todo.getCheckedOutBy().getId() == account.getId()) {
 
 			todoFacade.checkIn(todoId);
 
