@@ -22,9 +22,8 @@ public class AccountService {
 
 	@GET
 	@Produces(MediaType.TEXT_PLAIN)
-	@Path("create")
-	public Response register(
-			@QueryParam("email") String email,
+	@Path("register")
+	public Response register(@QueryParam("email") String email,
 			@QueryParam("password") String password) {
 
 		try {
@@ -39,7 +38,7 @@ public class AccountService {
 		} catch (TodoLogicException e) {
 
 			return Response.status(Status.INTERNAL_SERVER_ERROR)
-					.entity(gson.toJson(e.getType())).build();
+					.entity(gson.toJson(e.getType().getCode())).build();
 
 		}
 
