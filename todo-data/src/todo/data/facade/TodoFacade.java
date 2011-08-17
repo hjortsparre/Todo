@@ -3,6 +3,7 @@ package todo.data.facade;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.persistence.LockModeType;
 import javax.persistence.Query;
 
 import todo.data.entity.Account;
@@ -25,7 +26,8 @@ public class TodoFacade {
 
 			entityManager.getTransaction().begin();
 
-			Todo todo = entityManager.find(Todo.class, todoId);
+			Todo todo = entityManager.find(Todo.class, todoId, LockModeType.PESSIMISTIC_WRITE);
+			
 			if (todo.getCheckedOutBy() != null) {
 				throw new TodoDataException(Type.TODO_ALREADY_CHECKEDOUT);
 			}

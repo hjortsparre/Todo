@@ -6,7 +6,8 @@ public class TodoDataException extends Exception {
 		DATABASE_ERROR(101, "Couldn't complete database action"), 
 		INCORRECT_PK(201, "The supplied primary key isn't used by this entity"), 
 		EMAIL_NOT_UNIQUE(202, "The supplied email isn't unique"),
-		TODO_ALREADY_CHECKEDOUT(203, "The Todo item has already been checkd out");
+		TODO_ALREADY_CHECKEDOUT(203, "The Todo item has already been checkd out"),
+		CONCURRENCY_VERSION_ERROR(102, "Data couldn't be updated due to old version");
 
 		private int code;
 		private String message;

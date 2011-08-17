@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.Version;
 
 @Entity
 public class Account {
@@ -15,11 +16,14 @@ public class Account {
 	@GeneratedValue
 	private long id;
 
+	@Version
+	private int version;
+
 	private String employeeId;
 
 	@Column(unique = true)
 	private String email;
-	
+
 	private String password;
 
 	@OneToMany(mappedBy = "checkedOutBy")
@@ -64,5 +68,15 @@ public class Account {
 	public void setCheckedOut(List<Todo> checkedOut) {
 		this.checkedOut = checkedOut;
 	}
+
+	public int getVersion() {
+		return version;
+	}
+
+	public void setVersion(int version) {
+		this.version = version;
+	}
+	
+	
 
 }

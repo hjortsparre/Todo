@@ -1,7 +1,9 @@
 package todo.data.facade;
 
 import javax.persistence.EntityManager;
+import javax.persistence.LockModeType;
 import javax.persistence.NoResultException;
+import javax.persistence.OptimisticLockException;
 import javax.persistence.Query;
 
 import todo.data.entity.Account;
@@ -47,6 +49,52 @@ public class AccountFacade {
 
 			TodoDataLogger.severe(AccountFacade.class, "create", e, email,
 					password);
+
+			throw new TodoDataException(Type.DATABASE_ERROR, e);
+
+		} finally {
+
+			if (entityManager.getTransaction().isActive()) {
+				entityManager.getTransaction().rollback();
+			}
+
+			entityManager.close();
+
+		}
+
+	}
+
+	public void updateEmployeeId(long accountId, String employeeId)
+			throws TodoDataException {
+
+		TodoDataLogger.info(AccountFacade.class, "updateEmployeeId", accountId
+				+ "", employeeId);
+
+		EntityManager entityManager = EMF.createEntityManager();
+
+		try {
+
+			entityManager.getTransaction().begin();
+
+			Account account = entityManager.find(Account.class, accountId);
+			account.setEmployeeId(employeeId);
+
+			entityManager.merge(account);
+			entityManager.flush();
+
+			entityManager.getTransaction().commit();
+
+		} catch (OptimisticLockException e) {
+
+			TodoDataLogger.warning(AccountFacade.class, "updateEmployeeId", e,
+					accountId + "", employeeId);
+
+			throw new TodoDataException(Type.CONCURRENCY_VERSION_ERROR, e);
+
+		} catch (Exception e) {
+
+			TodoDataLogger.severe(AccountFacade.class, "updateEmployeeId", e,
+					accountId + "", employeeId);
 
 			throw new TodoDataException(Type.DATABASE_ERROR, e);
 

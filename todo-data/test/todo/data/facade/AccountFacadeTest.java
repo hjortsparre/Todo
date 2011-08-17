@@ -1,5 +1,9 @@
 package todo.data.facade;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.BeforeClass;
@@ -8,6 +12,7 @@ import org.junit.Test;
 import todo.data.entity.Account;
 import todo.data.util.EMF;
 import todo.data.util.TodoDataException;
+import todo.data.util.TodoDataException.Type;
 
 public class AccountFacadeTest {
 
@@ -58,4 +63,45 @@ public class AccountFacadeTest {
 		Assert.assertEquals("secret", account.getPassword());
 	}
 
+	@Test
+	public void testUpdateEmployeeConcurrency() throws Exception {
+
+		final long accountId = accountFacade.create("marcus.bendtsen@liu.se",
+				"secret");
+
+		final List<Thread> threads = new ArrayList<Thread>();
+		final HashMap<Thread, Type> failures = new HashMap<Thread, Type>();
+
+		for (int i = 1000; i < 1200; i++) {
+			final int c = i;
+			threads.add(new Thread() {
+				@Override
+				public void run() {
+					try {
+						accountFacade.updateEmployeeId(accountId, c + "-abcd");
+					} catch (TodoDataException e) {
+						failures.put(this, e.getType());
+					}
+				}
+			});
+		}
+
+		for (Thread thread : threads) {
+			thread.start();
+		}
+
+		// Wait for all threads to die, or database will be dropped from
+		// underneath the threads and will
+		// cause incorrect failures
+		for (Thread thread : threads) {
+			thread.join();
+		}
+
+		Assert.assertTrue(failures.size() != 0);
+
+		for (Type type : failures.values()) {
+			Assert.assertEquals(Type.CONCURRENCY_VERSION_ERROR, type);
+		}
+
+	}
 }
