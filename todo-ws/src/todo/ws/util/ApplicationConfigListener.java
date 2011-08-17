@@ -16,6 +16,9 @@ public class ApplicationConfigListener implements ServletContextListener {
 
 	@Override
 	public void contextInitialized(ServletContextEvent sce) {
+
+		System.setProperty("logPath", "/home/marcus/workspace");
+
 		EMF.createEntityManager(); // Force init to run
 	}
 

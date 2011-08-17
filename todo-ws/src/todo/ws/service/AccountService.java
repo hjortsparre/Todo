@@ -34,7 +34,7 @@ public class AccountService {
 
 		} catch (TodoDataException e) {
 			return Response.status(Status.INTERNAL_SERVER_ERROR)
-					.entity(gson.toJson(e.getType())).build();
+					.entity(gson.toJson(e.getType().getCode())).build();
 
 		} catch (TodoLogicException e) {
 
