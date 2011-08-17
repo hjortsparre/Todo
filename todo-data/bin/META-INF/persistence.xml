@@ -8,6 +8,7 @@
 		<provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
 		<shared-cache-mode>NONE</shared-cache-mode>
 		<validation-mode>CALLBACK</validation-mode>
+		<class>todo.data.entity.Todo</class>
 		<properties>
 			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/todo" />
 			<property name="javax.persistence.jdbc.password" value="todopass" />
@@ -22,6 +23,7 @@
 		<provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
 		<shared-cache-mode>NONE</shared-cache-mode>
 		<validation-mode>CALLBACK</validation-mode>
+		<class>todo.data.entity.Todo</class>
 		<properties>
 			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/todo_test" />
 			<property name="javax.persistence.jdbc.password" value="todopass" />
