@@ -8,6 +8,11 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Version;
+import javax.validation.constraints.NotNull;
+
+import org.hibernate.validator.constraints.Email;
+
+import todo.data.validation.EmployeeId;
 
 @Entity
 public class Account {
@@ -19,11 +24,15 @@ public class Account {
 	@Version
 	private int version;
 
+	@EmployeeId
 	private String employeeId;
 
 	@Column(unique = true)
+	@Email
+	@NotNull
 	private String email;
 
+	@NotNull
 	private String password;
 
 	@OneToMany(mappedBy = "checkedOutBy")
@@ -76,7 +85,5 @@ public class Account {
 	public void setVersion(int version) {
 		this.version = version;
 	}
-	
-	
 
 }

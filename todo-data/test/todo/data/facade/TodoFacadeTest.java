@@ -140,4 +140,14 @@ public class TodoFacadeTest {
 
 	}
 
+	@Test
+	public void testNameNull() {
+
+		try {
+			todoFacade.create(null);
+		} catch (TodoDataException e) {
+			Assert.assertEquals(TodoDataException.Type.CONSTRAINT_VIOLATION, e.getType());
+		}
+	}
+
 }

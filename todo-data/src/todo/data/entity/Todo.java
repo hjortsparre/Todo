@@ -4,6 +4,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.validation.constraints.NotNull;
+
+import org.hibernate.validator.constraints.Length;
 
 @Entity
 public class Todo {
@@ -12,6 +15,8 @@ public class Todo {
 	@GeneratedValue
 	private long id;
 
+	@NotNull
+	@Length(min=3)
 	private String name;
 
 	@ManyToOne

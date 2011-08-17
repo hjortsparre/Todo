@@ -5,6 +5,7 @@ import javax.persistence.LockModeType;
 import javax.persistence.NoResultException;
 import javax.persistence.OptimisticLockException;
 import javax.persistence.Query;
+import javax.validation.ConstraintViolationException;
 
 import todo.data.entity.Account;
 import todo.data.util.EMF;
@@ -37,6 +38,13 @@ public class AccountFacade {
 			entityManager.getTransaction().commit();
 
 			return account.getId();
+
+		} catch (ConstraintViolationException e) {
+
+			TodoDataLogger.warning(AccountFacade.class, "create", e, email,
+					password);
+
+			throw new TodoDataException(Type.CONSTRAINT_VIOLATION, e);
 
 		} catch (TodoDataException e) {
 
@@ -83,6 +91,13 @@ public class AccountFacade {
 			entityManager.flush();
 
 			entityManager.getTransaction().commit();
+
+		} catch (ConstraintViolationException e) {
+
+			TodoDataLogger.warning(AccountFacade.class, "updateEmployeeId", e,
+					accountId + "", employeeId);
+
+			throw new TodoDataException(Type.CONSTRAINT_VIOLATION, e);
 
 		} catch (OptimisticLockException e) {
 

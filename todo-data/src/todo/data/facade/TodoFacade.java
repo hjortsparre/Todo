@@ -5,6 +5,7 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.LockModeType;
 import javax.persistence.Query;
+import javax.validation.ConstraintViolationException;
 
 import todo.data.entity.Account;
 import todo.data.entity.Todo;
@@ -26,8 +27,9 @@ public class TodoFacade {
 
 			entityManager.getTransaction().begin();
 
-			Todo todo = entityManager.find(Todo.class, todoId, LockModeType.PESSIMISTIC_WRITE);
-			
+			Todo todo = entityManager.find(Todo.class, todoId,
+					LockModeType.PESSIMISTIC_WRITE);
+
 			if (todo.getCheckedOutBy() != null) {
 				throw new TodoDataException(Type.TODO_ALREADY_CHECKEDOUT);
 			}
@@ -117,6 +119,12 @@ public class TodoFacade {
 			entityManager.getTransaction().commit();
 
 			return todo.getId();
+
+		} catch (ConstraintViolationException e) {
+
+			TodoDataLogger.warning(TodoFacade.class, "create", e, name);
+
+			throw new TodoDataException(Type.CONSTRAINT_VIOLATION, e);
 
 		} catch (Exception e) {
 

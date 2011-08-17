@@ -104,4 +104,52 @@ public class AccountFacadeTest {
 		}
 
 	}
+
+	@Test
+	public void testEmailIncorrect() {
+
+		try {
+			long accountId = accountFacade.create("not@valid@liu.se", "secret");
+		} catch (TodoDataException e) {
+			Assert.assertEquals(TodoDataException.Type.CONSTRAINT_VIOLATION,
+					e.getType());
+		}
+	}
+
+	@Test
+	public void testEmailNull() {
+
+		try {
+			long accountId = accountFacade.create(null, "secret");
+		} catch (TodoDataException e) {
+			Assert.assertEquals(TodoDataException.Type.CONSTRAINT_VIOLATION,
+					e.getType());
+		}
+	}
+
+	@Test
+	public void testPasswordNull() {
+
+		try {
+			long accountId = accountFacade.create("marcus.bendtsen@liu.se",
+					null);
+		} catch (TodoDataException e) {
+			Assert.assertEquals(TodoDataException.Type.CONSTRAINT_VIOLATION,
+					e.getType());
+		}
+	}
+
+	@Test
+	public void testEmployeeIdIncorrect() {
+
+		try {
+			long accountId = accountFacade.create("marcus.bendtsen@liu.se",
+					"secret");
+			accountFacade.updateEmployeeId(accountId, "abc");
+		} catch (TodoDataException e) {
+			Assert.assertEquals(TodoDataException.Type.CONSTRAINT_VIOLATION,
+					e.getType());
+		}
+	}
+
 }
