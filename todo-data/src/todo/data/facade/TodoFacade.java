@@ -8,10 +8,13 @@ import javax.persistence.Query;
 import todo.data.entity.Todo;
 import todo.data.util.EMF;
 import todo.data.util.TodoDataException;
+import todo.data.util.TodoDataLogger;
 
 public class TodoFacade {
 
 	public long create(String name) throws TodoDataException {
+
+		TodoDataLogger.info(TodoFacade.class, "create", name);
 
 		EntityManager entityManager = EMF.createEntityManager();
 
@@ -30,6 +33,8 @@ public class TodoFacade {
 
 		} catch (Exception e) {
 
+			TodoDataLogger.severe(TodoFacade.class, "create", e, name);
+
 			throw new TodoDataException(TodoDataException.Type.DATABASE_ERROR,
 					e);
 
@@ -47,6 +52,8 @@ public class TodoFacade {
 
 	public Todo find(long id) throws TodoDataException {
 
+		TodoDataLogger.info(TodoFacade.class, "find", id + "");
+
 		EntityManager entityManager = EMF.createEntityManager();
 
 		try {
@@ -60,9 +67,13 @@ public class TodoFacade {
 
 		} catch (TodoDataException e) {
 
+			TodoDataLogger.warning(TodoFacade.class, "find", e, id + "");
+
 			throw e;
 
 		} catch (Exception e) {
+
+			TodoDataLogger.severe(TodoFacade.class, "find", e, id + "");
 
 			throw new TodoDataException(TodoDataException.Type.DATABASE_ERROR,
 					e);
@@ -77,6 +88,8 @@ public class TodoFacade {
 
 	public List<Todo> findAll() throws TodoDataException {
 
+		TodoDataLogger.info(TodoFacade.class, "findAll", "");
+
 		EntityManager entityManager = EMF.createEntityManager();
 
 		try {
@@ -86,6 +99,8 @@ public class TodoFacade {
 			return query.getResultList();
 
 		} catch (Exception e) {
+
+			TodoDataLogger.severe(TodoFacade.class, "findAll", e, "");
 
 			throw new TodoDataException(TodoDataException.Type.DATABASE_ERROR,
 					e);
@@ -99,6 +114,8 @@ public class TodoFacade {
 
 	public List<Todo> findByName(String name) throws TodoDataException {
 
+		TodoDataLogger.info(TodoFacade.class, "findByName", name);
+
 		EntityManager entityManager = EMF.createEntityManager();
 
 		try {
@@ -110,6 +127,8 @@ public class TodoFacade {
 			return query.getResultList();
 
 		} catch (Exception e) {
+
+			TodoDataLogger.severe(TodoFacade.class, "findByName", e, name);
 
 			throw new TodoDataException(TodoDataException.Type.DATABASE_ERROR,
 					e);
