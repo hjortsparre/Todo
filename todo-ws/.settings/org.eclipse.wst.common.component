@@ -3,6 +3,7 @@
     <wb-module deploy-name="todo-ws">
         <wb-resource deploy-path="/" source-path="/WebContent"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/test"/>
         <dependent-module archiveName="todo-data.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/todo-data/todo-data">
             <dependency-type>uses</dependency-type>
         </dependent-module>

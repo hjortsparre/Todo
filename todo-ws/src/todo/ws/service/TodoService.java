@@ -48,12 +48,12 @@ public class TodoService {
 
 		} catch (TodoDataException e) {
 
-			return Response.status(Status.INTERNAL_SERVER_ERROR)
+			return Response.status(Status.OK)
 					.entity(gson.toJson(e.getType().getCode())).build();
 
 		} catch (TodoLogicException e) {
 
-			return Response.status(Status.INTERNAL_SERVER_ERROR)
+			return Response.status(Status.OK)
 					.entity(gson.toJson(e.getType().getCode())).build();
 
 		}
@@ -75,12 +75,12 @@ public class TodoService {
 
 		} catch (TodoDataException e) {
 
-			return Response.status(Status.INTERNAL_SERVER_ERROR)
+			return Response.status(Status.OK)
 					.entity(gson.toJson(e.getType().getCode())).build();
 
 		} catch (TodoLogicException e) {
 
-			return Response.status(Status.INTERNAL_SERVER_ERROR)
+			return Response.status(Status.OK)
 					.entity(gson.toJson(e.getType().getCode())).build();
 
 		}
@@ -106,12 +106,12 @@ public class TodoService {
 
 		} catch (TodoDataException e) {
 
-			return Response.status(Status.INTERNAL_SERVER_ERROR)
+			return Response.status(Status.OK)
 					.entity(gson.toJson(e.getType().getCode())).build();
 
 		} catch (TodoLogicException e) {
 
-			return Response.status(Status.INTERNAL_SERVER_ERROR)
+			return Response.status(Status.OK)
 					.entity(gson.toJson(e.getType().getCode())).build();
 
 		}
