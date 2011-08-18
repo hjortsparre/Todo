@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import todo.webapp.dto.ResponseDTO;
 import todo.webapp.util.WebServiceRequest;
 
 @WebServlet("/RegisterServlet")
@@ -21,9 +22,9 @@ public class RegisterServlet extends HttpServlet {
 		String email = request.getParameter("email");
 		String password = request.getParameter("password");
 
-		String outcome = webServiceRequest.register(email, password);
+		ResponseDTO responseDTO = webServiceRequest.register(email, password);
 
-		request.setAttribute("outcome", outcome);
+		request.setAttribute("message", responseDTO.getMessage());
 
 		getServletContext().getRequestDispatcher("/index.jsp").forward(request,
 				response);

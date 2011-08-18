@@ -15,7 +15,7 @@
 <a href="LogoutServlet">Logout</a>
 <br />
 <br />
-<c:out value="${outcome}" />
+<c:out value="${message}" />
 <h1>Todo Items</h1>
 <form action="CreateTodoServlet" method="post"><label>Name:
 </label><input type="text" name="name" />

@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import todo.webapp.dto.ResponseDTO;
 import todo.webapp.util.WebServiceRequest;
 
 @WebServlet("/CreateTodoServlet")
@@ -24,9 +25,10 @@ public class CreateTodoServlet extends HttpServlet {
 
 		String name = request.getParameter("name");
 
-		String outcome = webServiceRequest.create(email, password, name);
+		ResponseDTO responseDTO = webServiceRequest.createTodo(email, password,
+				name);
 
-		request.setAttribute("outcome", outcome);
+		request.setAttribute("message", responseDTO.getMessage());
 
 		getServletContext().getRequestDispatcher("/list.jsp").forward(request,
 				response);
