@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import todo.webapp.util.HTTPHelper;
+import todo.webapp.dto.ResponseDTO;
 import todo.webapp.util.WebServiceRequest;
 
 @WebServlet("/CheckInServlet")
@@ -21,17 +21,18 @@ public class CheckInServlet extends HttpServlet {
 
 		try {
 
-			String email = request.getSession()
-					.getAttribute("email").toString();
-			String password = request.getSession()
-					.getAttribute("password").toString();
+			String email = request.getSession().getAttribute("email")
+					.toString();
+			String password = request.getSession().getAttribute("password")
+					.toString();
 
 			String todoId = request.getParameter("todoId");
 
-			String outcome = webServiceRequest
-					.checkIn(email, password, todoId);
+			ResponseDTO responseDTO = webServiceRequest.checkIn(email,
+					password, todoId);
 
-			request.setAttribute("outcome", outcome);
+			request.setAttribute("message", responseDTO.getMessage());
+
 			getServletContext().getRequestDispatcher("/list.jsp").forward(
 					request, response);
 

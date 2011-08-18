@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE web-app
+    PUBLIC "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
+    "http://java.sun.com/dtd/web-app_2_3.dtd">
+
+<web-app>
+
+	<!-- Servlets -->
+	<servlet>
+		<servlet-name>TodoService</servlet-name>
+		<servlet-class>todo.gwt.server.TodoServiceImpl</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>TodoService</servlet-name>
+		<url-pattern>/todogwt/todo</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>AccountService</servlet-name>
+		<servlet-class>todo.gwt.server.AccountServiceImpl</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>AccountService</servlet-name>
+		<url-pattern>/todogwt/account</url-pattern>
+	</servlet-mapping>
+
+
+	<!-- Default page to serve -->
+	<welcome-file-list>
+		<welcome-file>TodoGwt.html</welcome-file>
+	</welcome-file-list>
+
+</web-app>

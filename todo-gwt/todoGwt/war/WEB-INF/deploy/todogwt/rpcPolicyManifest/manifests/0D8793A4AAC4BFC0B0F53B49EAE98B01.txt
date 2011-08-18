@@ -1,0 +1,2 @@
+serviceClass: todo.gwt.client.service.TodoService
+path: 58786F2B3B6F718A9E8DEC96E4A6FDAB.gwt.rpc

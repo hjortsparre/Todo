@@ -1,0 +1,2 @@
+serviceClass: todo.gwt.client.service.GreetingService
+path: 1F22BB0F6A445891E7694019D11254A9.gwt.rpc

@@ -12,8 +12,8 @@
 </head>
 <body>
 
-<c:if test="${outcome != null}">
-${outcome}
+<c:if test="${message != null}">
+${message}
 </c:if>
 
 

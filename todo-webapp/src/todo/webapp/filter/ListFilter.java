@@ -15,6 +15,7 @@ import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 
+import todo.webapp.dto.ResponseDTO;
 import todo.webapp.dto.TodoDTO;
 import todo.webapp.util.HTTPHelper;
 import todo.webapp.util.WebServiceRequest;
@@ -26,6 +27,7 @@ import com.google.gson.reflect.TypeToken;
 		DispatcherType.FORWARD, DispatcherType.REQUEST })
 public class ListFilter implements Filter {
 
+	private Gson gson = new Gson();
 	private WebServiceRequest webServiceRequest = new WebServiceRequest();
 
 	public void destroy() {
@@ -36,8 +38,15 @@ public class ListFilter implements Filter {
 
 		try {
 
-			List<TodoDTO> todos = webServiceRequest.list();
+			ResponseDTO responseDTO = webServiceRequest.list();
+			// If this deserialization fails, we probably received an error code
+			Type collectionType = new TypeToken<Collection<TodoDTO>>() {
+			}.getType();
+			List<TodoDTO> todos = gson.fromJson(responseDTO.getPayload(),
+					collectionType);
+
 			request.setAttribute("todos", todos);
+
 			chain.doFilter(request, response);
 
 		} catch (Exception e) {
