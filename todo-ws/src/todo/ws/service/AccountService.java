@@ -11,6 +11,7 @@ import javax.ws.rs.core.Response.Status;
 import todo.data.util.TodoDataException;
 import todo.logic.facade.AccountLogicFacade;
 import todo.logic.util.TodoLogicException;
+import todo.ws.dto.ResponseDTO;
 
 import com.google.gson.Gson;
 
@@ -26,43 +27,49 @@ public class AccountService {
 	public Response register(@QueryParam("email") String email,
 			@QueryParam("password") String password) {
 
+		ResponseDTO responseDTO = new ResponseDTO();
+
 		try {
+
 			accountLogicFacade.register(email, password);
 
-			return Response.status(Status.OK).build();
-
 		} catch (TodoDataException e) {
-			return Response.status(Status.OK)
-					.entity(gson.toJson(e.getType().getCode())).build();
-
+			responseDTO.setCode(e.getType().getCode());
+			responseDTO.setMessage(e.getType().getMessage());
 		} catch (TodoLogicException e) {
-
-			return Response.status(Status.OK)
-					.entity(gson.toJson(e.getType().getCode())).build();
+			responseDTO.setCode(e.getType().getCode());
+			responseDTO.setMessage(e.getType().getMessage());
 		}
 
+		String json = gson.toJson(responseDTO);
+
+		return Response.status(Status.OK).entity(json).build();
 	}
 
 	@GET
 	@Produces(MediaType.TEXT_PLAIN)
 	@Path("login")
-	public Response login(@QueryParam("email") String email,
+	public Response login(
+			@QueryParam("email") String email,
 			@QueryParam("password") String password) {
 
+		ResponseDTO responseDTO = new ResponseDTO();
+
 		try {
+
 			accountLogicFacade.login(email, password);
 
-			return Response.status(Status.OK).build();
-
 		} catch (TodoDataException e) {
-			return Response.status(Status.OK)
-					.entity(gson.toJson(e.getType().getCode())).build();
-
+			responseDTO.setCode(e.getType().getCode());
+			responseDTO.setMessage(e.getType().getMessage());
 		} catch (TodoLogicException e) {
-
-			return Response.status(Status.OK)
-					.entity(gson.toJson(e.getType().getCode())).build();
+			responseDTO.setCode(e.getType().getCode());
+			responseDTO.setMessage(e.getType().getMessage());
 		}
+
+		String json = gson.toJson(responseDTO);
+
+		return Response.status(Status.OK).entity(json).build();
 
 	}
 

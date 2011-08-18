@@ -15,6 +15,7 @@ import todo.data.entity.Todo;
 import todo.data.util.TodoDataException;
 import todo.logic.facade.TodoLogicFacade;
 import todo.logic.util.TodoLogicException;
+import todo.ws.dto.ResponseDTO;
 
 import com.google.gson.Gson;
 
@@ -22,14 +23,16 @@ import com.google.gson.Gson;
 public class TodoService {
 
 	private Gson gson = new Gson();
-	private TodoLogicFacade todoLogicalFacade = new TodoLogicFacade();
+	private TodoLogicFacade todoLogicFacade = new TodoLogicFacade();
 
 	@GET
 	@Produces(MediaType.TEXT_PLAIN)
 	public Response list() {
 
+		ResponseDTO responseDTO = new ResponseDTO();
+
 		try {
-			List<Todo> todos = todoLogicalFacade.list();
+			List<Todo> todos = todoLogicFacade.list();
 
 			// If there is an account in getCheckedOut, it
 			// will create a circular reference when serializing to
@@ -42,21 +45,19 @@ public class TodoService {
 				}
 			}
 
-			String entityData = gson.toJson(todos);
-
-			return Response.status(Status.OK).entity(entityData).build();
+			String jsonPayload = gson.toJson(todos);
+			responseDTO.setPayload(jsonPayload);
 
 		} catch (TodoDataException e) {
-
-			return Response.status(Status.OK)
-					.entity(gson.toJson(e.getType().getCode())).build();
-
+			responseDTO.setCode(e.getType().getCode());
+			responseDTO.setMessage(e.getType().getMessage());
 		} catch (TodoLogicException e) {
-
-			return Response.status(Status.OK)
-					.entity(gson.toJson(e.getType().getCode())).build();
-
+			responseDTO.setCode(e.getType().getCode());
+			responseDTO.setMessage(e.getType().getMessage());
 		}
+
+		String json = gson.toJson(responseDTO);
+		return Response.status(Status.OK).entity(json).build();
 
 	}
 
@@ -67,23 +68,23 @@ public class TodoService {
 			@QueryParam("password") String password,
 			@QueryParam("name") String name) {
 
+		ResponseDTO responseDTO = new ResponseDTO();
+
 		try {
 
-			todoLogicalFacade.create(email, password, name);
-
-			return Response.status(Status.OK).build();
+			todoLogicFacade.create(email, password, name);
 
 		} catch (TodoDataException e) {
-
-			return Response.status(Status.OK)
-					.entity(gson.toJson(e.getType().getCode())).build();
-
+			responseDTO.setCode(e.getType().getCode());
+			responseDTO.setMessage(e.getType().getMessage());
 		} catch (TodoLogicException e) {
-
-			return Response.status(Status.OK)
-					.entity(gson.toJson(e.getType().getCode())).build();
-
+			responseDTO.setCode(e.getType().getCode());
+			responseDTO.setMessage(e.getType().getMessage());
 		}
+
+		String json = gson.toJson(responseDTO);
+
+		return Response.status(Status.OK).entity(json).build();
 	}
 
 	@GET
@@ -94,28 +95,27 @@ public class TodoService {
 			@QueryParam("password") String password,
 			@QueryParam("todoId") long todoId) {
 
+		ResponseDTO responseDTO = new ResponseDTO();
+
 		try {
 
 			if (action.equals("out")) {
-				todoLogicalFacade.checkOut(email, password, todoId);
+				todoLogicFacade.checkOut(email, password, todoId);
 			} else if (action.equals("in")) {
-				todoLogicalFacade.checkIn(email, password, todoId);
+				todoLogicFacade.checkIn(email, password, todoId);
 			}
 
-			return Response.status(Status.OK).build();
-
 		} catch (TodoDataException e) {
-
-			return Response.status(Status.OK)
-					.entity(gson.toJson(e.getType().getCode())).build();
-
+			responseDTO.setCode(e.getType().getCode());
+			responseDTO.setMessage(e.getType().getMessage());
 		} catch (TodoLogicException e) {
-
-			return Response.status(Status.OK)
-					.entity(gson.toJson(e.getType().getCode())).build();
-
+			responseDTO.setCode(e.getType().getCode());
+			responseDTO.setMessage(e.getType().getMessage());
 		}
 
+		String json = gson.toJson(responseDTO);
+
+		return Response.status(Status.OK).entity(json).build();
 	}
 
 }
