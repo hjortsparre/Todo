@@ -39,7 +39,29 @@ public class AccountService {
 
 			return Response.status(Status.OK)
 					.entity(gson.toJson(e.getType().getCode())).build();
+		}
 
+	}
+
+	@GET
+	@Produces(MediaType.TEXT_PLAIN)
+	@Path("login")
+	public Response login(@QueryParam("email") String email,
+			@QueryParam("password") String password) {
+
+		try {
+			accountLogicFacade.login(email, password);
+
+			return Response.status(Status.OK).build();
+
+		} catch (TodoDataException e) {
+			return Response.status(Status.OK)
+					.entity(gson.toJson(e.getType().getCode())).build();
+
+		} catch (TodoLogicException e) {
+
+			return Response.status(Status.OK)
+					.entity(gson.toJson(e.getType().getCode())).build();
 		}
 
 	}
