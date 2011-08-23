@@ -2,6 +2,8 @@ package todo.gwt.client;
 
 import java.util.List;
 
+import todo.gwt.client.SignalHandler.Handler;
+import todo.gwt.client.SignalHandler.Type;
 import todo.gwt.client.component.LoginAndRegisterForm;
 import todo.gwt.client.component.TodoTable;
 import todo.gwt.client.dto.TodoDTO;
@@ -14,18 +16,24 @@ import com.google.gwt.user.client.ui.VerticalPanel;
 
 public class TodoGwt implements EntryPoint {
 
-	private static VerticalPanel wrapper = new VerticalPanel();
-	private static TodoTable todoTable = new TodoTable();
-
-	public static String suppliedEmail;
-	public static String suppliedPassword;
+	private VerticalPanel wrapper = new VerticalPanel();
+	private TodoTable todoTable = new TodoTable();
 
 	public void onModuleLoad() {
 		wrapper.add(new LoginAndRegisterForm());
 		RootPanel.get().add(wrapper);
+	
+		SignalHandler.addHandler(Type.ACCOUNT_LOGIN, new Handler() {
+			
+			@Override
+			public void onEvent() {
+				onLogin();
+			}
+		});
+	
 	}
 
-	public static void onLogin() {
+	public void onLogin() {
 		TodoServiceAsync.instance.list(new AsyncCallback<List<TodoDTO>>() {
 
 			@Override

@@ -2,6 +2,7 @@ package todo.gwt.client.component;
 
 import java.util.List;
 
+import todo.gwt.client.Session;
 import todo.gwt.client.TodoGwt;
 import todo.gwt.client.dto.AccountDTO;
 import todo.gwt.client.dto.ResponseDTO;
@@ -78,8 +79,8 @@ public class TodoTable extends Composite {
 					@Override
 					public void onClick(ClickEvent event) {
 						TodoServiceAsync.instance.checkIn(
-								TodoGwt.suppliedEmail,
-								TodoGwt.suppliedPassword, todo.getId(),
+								Session.suppliedEmail,
+								Session.suppliedPassword, todo.getId(),
 								new AsyncCallback<ResponseDTO>() {
 
 									@Override
@@ -124,8 +125,8 @@ public class TodoTable extends Composite {
 					@Override
 					public void onClick(ClickEvent event) {
 						TodoServiceAsync.instance.checkOut(
-								TodoGwt.suppliedEmail,
-								TodoGwt.suppliedPassword, todo.getId(),
+								Session.suppliedEmail,
+								Session.suppliedPassword, todo.getId(),
 								new AsyncCallback<ResponseDTO>() {
 
 									@Override
@@ -134,7 +135,7 @@ public class TodoTable extends Composite {
 											message.setText("");
 											todo.setCheckedOutBy(new AccountDTO());
 											todo.getCheckedOutBy().setEmail(
-													TodoGwt.suppliedEmail);
+													Session.suppliedEmail);
 											generateTable();
 										} else {
 											message.setText(result.getMessage());
