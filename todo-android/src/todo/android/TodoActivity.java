@@ -38,7 +38,6 @@ public class TodoActivity extends Activity {
 
 		LinearLayout linearLayout = new LinearLayout(this);
 		linearLayout.setOrientation(LinearLayout.VERTICAL);
-		ListView listView = new ListView(this);
 		for (TodoDTO todo : todos) {
 			TextView textView = new TextView(this);
 			textView.setText(todo.getName());
