@@ -24,7 +24,8 @@ public class AccountService {
 	@GET
 	@Produces(MediaType.TEXT_PLAIN)
 	@Path("register")
-	public Response register(@QueryParam("email") String email,
+	public Response register(
+			@QueryParam("email") String email,
 			@QueryParam("password") String password) {
 
 		ResponseDTO responseDTO = new ResponseDTO();
@@ -34,11 +35,15 @@ public class AccountService {
 			accountLogicFacade.register(email, password);
 
 		} catch (TodoDataException e) {
+			
 			responseDTO.setCode(e.getType().getCode());
 			responseDTO.setMessage(e.getType().getMessage());
+		
 		} catch (TodoLogicException e) {
+		
 			responseDTO.setCode(e.getType().getCode());
 			responseDTO.setMessage(e.getType().getMessage());
+		
 		}
 
 		String json = gson.toJson(responseDTO);
