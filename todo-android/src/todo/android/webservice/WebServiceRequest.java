@@ -8,8 +8,8 @@ public class WebServiceRequest {
 
 	private Gson gson = new Gson();
 
-	private static final String accountEndpoint = "http://localhost:8080/todo-ws/rest/account";
-	private static final String todoEndpoint = "http://localhost:8080/todo-ws/rest/todo";
+	private static final String accountEndpoint = "http://192.168.100.100:8080/todo-ws/rest/account";
+	private static final String todoEndpoint = "http://192.168.100.100:8080/todo-ws/rest/todo";
 
 	public ResponseDTO register(String email, String password) {
 		try {
@@ -27,6 +27,7 @@ public class WebServiceRequest {
 					"email", email, "password", password);
 			return gson.fromJson(outcome, ResponseDTO.class);
 		} catch (Exception e) {
+			e.printStackTrace();
 			return null;
 		}
 	}
@@ -67,6 +68,7 @@ public class WebServiceRequest {
 					email, "password", password, "name", name);
 			return gson.fromJson(outcome, ResponseDTO.class);
 		} catch (Exception e) {
+			e.printStackTrace();
 			return null;
 		}
 
