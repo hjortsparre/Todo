@@ -1,5 +1,8 @@
 package todo.gwt.client.component;
 
+import todo.gwt.client.Session;
+import todo.gwt.client.SignalHandler;
+import todo.gwt.client.SignalHandler.Type;
 import todo.gwt.client.TodoGwt;
 import todo.gwt.client.dto.ResponseDTO;
 import todo.gwt.client.service.AccountServiceAsync;
@@ -51,9 +54,9 @@ public class LoginAndRegisterForm extends Composite {
 							@Override
 							public void onSuccess(ResponseDTO result) {
 								if (result.getCode() == 0) {
-									TodoGwt.suppliedPassword = password.getValue();
-									TodoGwt.suppliedEmail = email.getValue();
-									TodoGwt.onLogin();
+									Session.suppliedPassword = password.getValue();
+									Session.suppliedEmail = email.getValue();
+									SignalHandler.fireSignal(Type.ACCOUNT_LOGIN);
 								} else {
 									message.setText(result.getMessage());
 								}
