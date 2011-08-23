@@ -42,12 +42,12 @@ public class TodoList extends LinearLayout {
 		createButton.setText("Create");
 
 		this.setOrientation(LinearLayout.VERTICAL);
-		
+
 		this.addView(nameLabel);
 		this.addView(name);
 		this.addView(createButton);
 		this.addView(todoListLayout);
-		
+
 		bindEvents();
 		bindHandlers();
 	}
@@ -68,13 +68,14 @@ public class TodoList extends LinearLayout {
 
 			@Override
 			public void onClick(View v) {
-				
+
 				ResponseDTO responseDTO = webServiceRequest.createTodo(
 						Session.suppliedEmail, Session.suppliedPassword, name
 								.getText().toString());
-				
+
 				if (responseDTO.getCode() == 0) {
-					SignalHandler.fireSignal(SignalHandler.Type.TODO_ITEM_CREATED);
+					SignalHandler
+							.fireSignal(SignalHandler.Type.TODO_ITEM_CREATED);
 				}
 
 			}
