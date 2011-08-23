@@ -41,6 +41,7 @@ public class HTTPHelper {
 				builder.deleteCharAt(builder.length() - 1);
 			}
 			in.close();
+			
 			return builder.toString();
 
 		} else {
